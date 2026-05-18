@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lung Cancer Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Lung Cancer Prediction System</h1>
+    <p class="subtitle">Enter patient details carefully</p>
+
+    <form action="/predict" method="POST">
+
+        <div class="grid">
+
+            <input type="number" name="GENDER" placeholder="Gender (1=Male, 0=Female)" required>
+            <input type="number" name="AGE" placeholder="Age (e.g. 45)" required>
+
+            <input type="number" name="SMOKING" placeholder="Smoking (0/1)" required>
+            <input type="number" name="YELLOW_FINGERS" placeholder="Yellow Fingers (0/1)" required>
+
+            <input type="number" name="ANXIETY" placeholder="Anxiety (0/1)" required>
+            <input type="number" name="PEER_PRESSURE" placeholder="Peer Pressure (0/1)" required>
+
+            <input type="number" name="CHRONIC_DISEASE" placeholder="Chronic Disease (0/1)" required>
+            <input type="number" name="FATIGUE" placeholder="Fatigue (0/1)" required>
+
+        </div>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">
+            <h2>{{ prediction_text }}</h2>
+
+            {% if probability is not none %}
+                <p>Risk Probability: {{ probability }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
