@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
 import joblib
+
 import numpy as np
 
-app = Flask(__name__)
+app1 = Flask(__name__)
+
 
 # Load model
 try:
@@ -13,11 +15,12 @@ except Exception as e:
     model = None
 
 
-@app.route('/')
+@app1.route('/')
 def home():
-    return render_template("index.html")
+    return render_template("index1.html")
 
-@app.route('/predict', methods=['POST'])
+
+@app1.route('/predict', methods=['POST'])
 def predict():
 
     if model is None:
@@ -36,8 +39,6 @@ def predict():
         ]])
 
         prediction = model.predict(features)
-
-        # SAFE probability handling
         proba = model.predict_proba(features)
 
         if len(proba[0]) > 1:
@@ -51,7 +52,7 @@ def predict():
             result = "✅ Low Risk: No Lung Cancer Detected"
 
         return render_template(
-            "index.html",
+            "index1.html",
             prediction_text=result,
             probability=risk_score
         )
@@ -59,8 +60,6 @@ def predict():
     except Exception as e:
         return f"Error during prediction: {str(e)}"
 
-     
 
 if __name__ == "__main__":
-    app.run(debug=True)
-
+    app1.run(debug=True)

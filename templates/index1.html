@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Lung Cancer Prediction</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+  <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
-
 <body>
-
+<div class="hospital-bg"></div>
+<div class="hospital-overlay"></div>
+<div class="heartbeat"></div>
+<img src="https://cdn-icons-png.flaticon.com/512/2966/2966488.png" class="lung-rotate">
+<img src="https://cdn-icons-png.flaticon.com/512/2966/2966488.png" class="lung-bg">
 <div class="container">
 
-    <h1>Lung Cancer Prediction System</h1>
+    <h1>Lung Cancer Prediction System🫁</h1>
     <p class="subtitle">Enter patient details carefully</p>
 
     <form action="/predict" method="POST">
@@ -30,6 +35,11 @@
             <input type="number" name="FATIGUE" placeholder="Fatigue (0/1)" required>
 
         </div>
+<div class="bg">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+</div>
+<div class="background"></div>
 
         <button type="submit">Predict</button>
     </form>
