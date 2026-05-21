@@ -643,20 +643,603 @@ animation: heartbeat 1.8s infinite;
     box-shadow: 0 0 40px rgba(0, 180, 216, 0.2);
     border-radius: 20px;
 }
-body::before {
-    content: "";
+/* full screen background */
+.background {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    background: #0b0f1a;
+}
+
+/* zigzag moving pattern */
+.zigzag {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        135deg,
+        rgba(0, 255, 255, 0.15) 0px,
+        rgba(0, 255, 255, 0.15) 8px,
+        transparent 8px,
+        transparent 40px
+    );
+
+    animation: move 6s linear infinite;
+}
+
+/* glowing pulse overlay */
+.pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0,255,255,0.15), transparent 70%);
+    animation: pulseAnim 3s ease-in-out infinite;
+}
+
+/* animations */
+@keyframes move {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
+}
+
+@keyframes pulseAnim {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* main container above background */
+.container {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+/* full background */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0b0f1a;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* pulse glow */
+.pulse {
+    position: absolute;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle,
-        rgba(0, 180, 216, 0.08),
-        transparent 60%);
-    animation: floatLight 10s infinite linear;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(
+        circle,
+        rgba(0, 255, 255, 0.25) 0%,
+        rgba(0, 255, 255, 0.08) 30%,
+        transparent 70%
+    );
+
+    animation: pulseMove 4s ease-in-out infinite;
+}
+
+/* pulse animation */
+@keyframes pulseMove {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+}
+
+/* content stays above background */
+.container {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+/* common box style */
+.box {
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    opacity: 0.7;
+    z-index: 1;
+    filter: blur(0.5px);
+}
+
+/* ⚫ Black animated box */
+.black-box {
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+    top: 10%;
+    left: 5%;
+    animation: floatBlack 6s ease-in-out infinite;
+}
+
+/* 🔵 Blue animated box */
+.blue-box {
+    background: rgba(0, 150, 255, 0.25);
+    box-shadow: 0 0 30px rgba(0, 150, 255, 0.8);
+    top: 20%;
+    right: 5%;
+    animation: floatBlue 5s ease-in-out infinite;
+}
+
+/* 🌸 Pink animated box */
+.pink-box {
+    background: rgba(255, 105, 180, 0.25);
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
+    bottom: 10%;
+    left: 10%;
+    animation: floatPink 7s ease-in-out infinite;
+}
+
+/* animations */
+@keyframes floatBlack {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(30px) scale(1.05); }
+}
+
+@keyframes floatBlue {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-40px) rotate(10deg); }
+}
+
+@keyframes floatPink {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-25px) scale(1.1); }
+}
+
+/* keep form above everything */
+.container {
+    position: relative;
+    z-index: 5;
+}
+/* soft pink + blue gradient background */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+
+    background: linear-gradient(
+        135deg,
+        #ffd6e8,   /* light pink */
+        #d6f0ff    /* light blue */
+    );
+}
+.pulse {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(255, 182, 193, 0.25),
+        rgba(173, 216, 230, 0.15),
+        transparent 70%
+    );
+
+    animation: softPulse 6s ease-in-out infinite;
+}
+
+@keyframes softPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+}
+.container {
+    position: relative;
+    z-index: 5;
+
+    width: 420px;
+    margin: 60px auto;
+    padding: 25px;
+
+    background: rgba(10, 15, 30, 0.85); /* dark inside box */
+    backdrop-filter: blur(10px);
+
+    border-radius: 18px;
+
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(0, 150, 255, 0.2);
+
+    color: white;
+    text-align: center;
+}
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+
+    border: none;
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(90deg, #00aaff, #ff6ec7);
+    color: white;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.6);
+}
+/* base lung style */
+.lung {
+    position: fixed;
+    width: 180px;
+    opacity: 0.75;
+    z-index: 1;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+}
+
+/* LEFT side */
+.left-black {
+    left: 10px;
+    top: 20%;
+    animation: floatBlack 5s ease-in-out infinite;
+}
+
+.left-red {
+    left: 20px;
+    bottom: 15%;
+    animation: floatRed 6s ease-in-out infinite;
+}
+
+/* RIGHT side */
+.right-black {
+    right: 10px;
+    top: 25%;
+    animation: floatBlack 5.5s ease-in-out infinite;
+}
+
+.right-red {
+    right: 20px;
+    bottom: 20%;
+    animation: floatRed 6.5s ease-in-out infinite;
+}
+
+/* animations */
+@keyframes floatBlack {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.05); }
+}
+
+@keyframes floatRed {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(20px) scale(1.08); }
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 40px;
+}
+
+.container {
+    margin: 0;
+}
+.pulse-wave {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+
+    background: linear-gradient(90deg,
+        transparent 0%,
+        transparent 48%,
+        rgba(255, 0, 100, 0.6) 50%,
+        transparent 52%,
+        transparent 100%
+    );
+
+    animation: moveWave 2s linear infinite;
+}
+/* background */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(135deg, #ffd6e8, #d6f0ff);
+    overflow: hidden;
     z-index: -1;
 }
 
-@keyframes floatLight {
-    0% { transform: translate(0,0); }
-    50% { transform: translate(-50px,-50px); }
-    100% { transform: translate(0,0); }
+/* SVG container */
+.wave {
+    position: absolute;
+    width: 200%;
+    height: 100%;
 }
+
+/* common wave style */
+.wave path {
+    fill: none;
+    stroke-width: 2;
+    opacity: 0.6;
+    animation: moveWave 4s linear infinite;
+}
+
+/* colors */
+.red {
+    stroke: rgba(255, 0, 0, 0.7);
+}
+
+.blue {
+    stroke: rgba(0, 150, 255, 0.7);
+    animation-delay: -1.3s;
+}
+
+.green {
+    stroke: rgba(0, 255, 120, 0.7);
+    animation-delay: -2.6s;
+}
+
+/* movement */
+@keyframes moveWave {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+
+    /* split dark blue + dark pink */
+    background: linear-gradient(
+        to right,
+        #0a1f44 50%,   /* dark blue */
+        #3a0a2a 50%    /* dark pink */
+    );
+}
+.glow-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.08),
+        transparent 60%
+    );
+}
+.container {
+    position: relative;
+    z-index: 5;
+
+    width: 420px;
+    margin: 5px auto;        /* slightly tighter spacing */
+
+    transform: translateY(-40px);  /* 👈 moved a little more up */
+
+    padding: 25px;
+
+    background: rgba(10, 15, 30, 0.85);
+    backdrop-filter: blur(10px);
+
+    border-radius: 18px;
+
+    color: white;
+    text-align: center;
+
+    box-shadow:
+        0 0 15px rgba(0, 170, 255, 0.6),
+        0 0 25px rgba(255, 105, 180, 0.5);
+}
+.frame-box {
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    border-radius: 14px;
+    opacity: 0.6;
+    z-index: 1;
+    backdrop-filter: blur(4px);
+    animation: floatBox 4s ease-in-out infinite;
+}
+
+/* shared animation */
+@keyframes floatBox {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.frame-box {
+    position: fixed;
+    width: 90px;
+    height: 90px;
+    border-radius: 18px;
+    z-index: 1;
+    opacity: 0.75;
+
+    /* 🌈 rainbow glow */
+    background: linear-gradient(
+        45deg,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet
+    );
+
+    background-size: 300% 300%;
+    animation: floatBox 5s ease-in-out infinite,
+               rainbowMove 6s linear infinite;
+
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
+
+/* floating */
+@keyframes floatBox {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* rainbow motion */
+@keyframes rainbowMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 📍 corners only */
+
+/* top-left */
+.b1 { top: 5%; left: 5%; }
+
+/* top-right */
+.b2 { top: 5%; right: 5%; }
+
+/* bottom-left */
+.b3 { bottom: 5%; left: 5%; }
+
+/* bottom-right */
+.b4 { bottom: 5%; right: 5%; }
+select {
+    width: 95%;
+    padding: 10px;
+    margin: 8px 0;
+
+    border-radius: 10px;
+    border: none;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+
+    outline: none;
+}
+
+select option {
+    color: black; /* important for readability */
+}
+/* --- Revolving Spiral Container --- */
+.spiral-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+/* Outer Spiral Ring */
+.spiral-outer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent;
+    border-top-color: #00d2ff; /* Neon Blue */
+    border-bottom-color: #d946ef; /* Neon Pink */
+    border-radius: 50%;
+    animation: spinRevolve 1.5s linear infinite;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+}
+
+/* Inner Counter-Rotating Spiral Ring */
+.spiral-inner {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    border: 4px solid transparent;
+    border-left-color: #ff007f;
+    border-right-color: #00ffcc;
+    border-radius: 50%;
+    animation: spinCounterRevolve 1s linear infinite;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+}
+
+/* Core Pulsing Center */
+.spiral-core {
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    background: radial-gradient(circle, #ffffff 0%, rgba(217, 70, 239, 0.8) 100%);
+    border-radius: 50%;
+    animation: pulseCore 2s ease-in-out infinite;
+    box-shadow: 0 0 20px #d946ef;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes spinRevolve {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1); /* Subtle breathing scale effect */
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes spinCounterRevolve {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes pulseCore {
+    0%, 100% { transform: scale(0.8); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
